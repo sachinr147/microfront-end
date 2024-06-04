@@ -72,20 +72,20 @@
         </a>
       </v-card-text>
     </v-card>
-    <Snackbar />
-    <Loader />
+    <SnackbarPop />
+    <LoaderPop />
   </div>
 </template>
 <script>
-import Snackbar from "./components/Snackbar.vue";
-import Loader from "./components/Loader.vue";
+import SnackbarPop from "./components/SnackbarPop.vue";
+import LoaderPop from "./components/LoaderPop.vue";
 import emitter from "./event-bus.js";
 
 export default {
   name: "app",
   components: {
-    Snackbar,
-    Loader,
+    SnackbarPop,
+    LoaderPop,
   },
   data: () => ({
     visible: false,
@@ -99,14 +99,19 @@ export default {
         this.username === "sachinr147@gmail.com" &&
         this.password === "password123"
       ) {
-        if (typeof window.showSnackbar === "function") {
+        if (typeof window.showLoader === "function") {
           window.showLoader(); // Call the global showSnackbar function if available
         } else {
           emitter.emit("show-hide-loader");
         }
 
         setTimeout(function () {
+
+          if (typeof window.hideLoader === "function") {
+          window.hideLoader(); // Call the global showSnackbar function if available
+        } else {
           emitter.emit("show-hide-loader");
+        }
           // On successful login:
           localStorage.setItem("token", "true");
 
