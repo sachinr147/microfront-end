@@ -106,12 +106,11 @@ export default {
         }
 
         setTimeout(function () {
-
           if (typeof window.hideLoader === "function") {
-          window.hideLoader(); // Call the global showSnackbar function if available
-        } else {
-          emitter.emit("show-hide-loader");
-        }
+            window.hideLoader(); // Call the global showSnackbar function if available
+          } else {
+            emitter.emit("show-hide-loader");
+          }
           // On successful login:
           localStorage.setItem("token", "true");
 
